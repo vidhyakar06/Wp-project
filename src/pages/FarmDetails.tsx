@@ -192,14 +192,9 @@ export default function FarmDetails() {
 
       <div className="mb-6 rounded-2xl overflow-hidden shadow-lg relative h-48 sm:h-64">
         <img
-          src="https://images.pexels.com/photos/4407999/pexels-photo-4407999.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          src="/farm-banner.png?v=2"
           alt="Farm field"
           className="w-full h-full object-cover"
-          onError={(e) => {
-            const img = e.currentTarget;
-            img.onerror = null;
-            img.src = 'https://images.pexels.com/photos/1112080/pexels-photo-1112080.jpeg?auto=compress&cs=tinysrgb&w=1200';
-          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white">
