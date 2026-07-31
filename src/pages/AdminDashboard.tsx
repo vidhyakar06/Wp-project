@@ -418,13 +418,26 @@ function EditFormModal({ item, tab, onClose, onSave }: {
         </div>
         <div className="p-6 space-y-4">
           {fields[tab].map((field) => (
-            <Input
-              key={field.key}
-              label={field.label}
-              type={field.type || 'text'}
-              value={String(form[field.key] ?? '')}
-              onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-            />
+            <div key={field.key} className="space-y-1.5">
+              <Input
+                label={field.label}
+                type={field.type || 'text'}
+                value={String(form[field.key] ?? '')}
+                onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+              />
+              {field.key === 'image_url' && (
+                <div className="mt-2">
+                  <p className="text-xs font-medium text-slate-500 mb-1">Image Preview:</p>
+                  <div className="h-32 w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 relative bg-slate-100 dark:bg-slate-800">
+                    <CropImage
+                      src={form.image_url}
+                      alt={`${form.crop_name || ''} ${form.disease_name || ''}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </div>
         <div className="flex justify-end gap-3 p-6 border-t border-slate-200 dark:border-slate-700">

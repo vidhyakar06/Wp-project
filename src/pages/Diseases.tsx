@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Bug, Search, AlertCircle, Shield, FlaskRound, Leaf, Eye, Calendar } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Bug, Search, AlertCircle, Shield, FlaskRound, Leaf, Eye, Calendar, Plus, X, Save } from 'lucide-react';
 import { supabase, type Disease } from '../lib/supabase';
 import PageHeader from '../components/ui/PageHeader';
 import Card from '../components/ui/Card';
+import Button from '../components/ui/Button';
+import { Input, Select } from '../components/ui/Input';
 import { EmptyState, LoadingSpinner } from '../components/ui/Loading';
 import CropImage from '../components/ui/CropImage';
 
@@ -12,6 +14,7 @@ export default function Diseases() {
   const [diseases, setDiseases] = useState<Disease[]>([]);
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState<Disease | null>(null);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     const fetchDiseases = async () => {
@@ -27,6 +30,10 @@ export default function Diseases() {
     d.disease_name.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleDiseaseAdded = (newDisease: Disease) => {
+    setDiseases((prev) => [newDisease, ...prev]);
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -39,19 +46,26 @@ export default function Diseases() {
     <div>
       <PageHeader
         title="Crop Diseases"
-        subtitle="Find and learn about diseases affecting your crops"
+        subtitle="Find, manage, and learn about diseases affecting your crops"
         icon={<Bug className="w-6 h-6" />}
+        action={
+          <Button onClick={() => setShowAddModal(true)} icon={<Plus className="w-4 h-4" />}>
+            Add Disease
+          </Button>
+        }
       />
 
-      <div className="mb-6 relative max-w-md">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-        <input
-          type="text"
-          placeholder="Search by crop or disease name..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="input-field pl-10"
-        />
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+        <div className="relative w-full max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <input
+            type="text"
+            placeholder="Search by crop or disease name..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="input-field pl-10"
+          />
+        </div>
       </div>
 
       {filtered.length === 0 ? (
@@ -191,6 +205,212 @@ export default function Diseases() {
           </motion.div>
         </motion.div>
       )}
+
+      {/* Add Disease Modal */}
+      <AnimatePresence>
+        {showAddModal && (
+          <AddDiseaseModal
+            onClose={() => setShowAddModal(false)}
+            onSave={(newDisease) => {
+              handleDiseaseAdded(newDisease);
+              setShowAddModal(false);
+            }}
+          />
+        )}
+      </AnimatePresence>
     </div>
+  );
+}
+
+function AddDiseaseModal({
+  onClose,
+  onSave,
+}: {
+  onClose: () => void;
+  onSave: (disease: Disease) => void;
+}) {
+  const [form, setForm] = useState({
+    crop_name: '',
+    disease_name: '',
+    season: 'Monsoon Season',
+    symptoms: '',
+    causes: '',
+    prevention: '',
+    treatment: '',
+    organic_solution: '',
+    image_url: '',
+  });
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.crop_name || !form.disease_name) {
+      setError('Please fill in Crop Name and Disease Name.');
+      return;
+    }
+    setSaving(true);
+    setError('');
+
+    const payload = {
+      ...form,
+      image_url: form.image_url || `/crops/${form.crop_name.toLowerCase().replace(/\s+/g, '-')}.png`,
+    };
+
+    const { data, error: dbErr } = await supabase.from('diseases').insert([payload]).select().single();
+
+    if (dbErr) {
+      setError(dbErr.message);
+      setSaving(false);
+    } else if (data) {
+      onSave(data);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+        className="glass-card max-w-xl w-full max-h-[85vh] overflow-y-auto"
+      >
+        <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
+          <div className="flex items-center gap-2">
+            <Bug className="w-5 h-5 text-primary-600" />
+            <h3 className="text-lg font-semibold text-slate-800 dark:text-white">Add New Disease</h3>
+          </div>
+          <button onClick={onClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          {error && (
+            <div className="p-3 text-xs rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
+              {error}
+            </div>
+          )}
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            <Input
+              label="Crop Name *"
+              placeholder="e.g. Tomato, Paddy, Wheat"
+              value={form.crop_name}
+              onChange={(e) => setForm({ ...form, crop_name: e.target.value })}
+            />
+            <Input
+              label="Disease Name *"
+              placeholder="e.g. Early Blight, Leaf Spot"
+              value={form.disease_name}
+              onChange={(e) => setForm({ ...form, disease_name: e.target.value })}
+            />
+          </div>
+
+          <Select
+            label="Suitable / Prevalent Season"
+            value={form.season}
+            onChange={(e) => setForm({ ...form, season: e.target.value })}
+            options={[
+              { value: 'Monsoon Season', label: 'Monsoon Season' },
+              { value: 'Winter Season', label: 'Winter Season' },
+              { value: 'Summer Season', label: 'Summer Season' },
+              { value: 'All Seasons', label: 'All Seasons' },
+            ]}
+          />
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Symptoms</label>
+            <textarea
+              rows={2}
+              className="input-field"
+              placeholder="Describe visible symptoms on leaves, stem or fruit..."
+              value={form.symptoms}
+              onChange={(e) => setForm({ ...form, symptoms: e.target.value })}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Causes</label>
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Fungal, bacterial, virus, moisture level..."
+              value={form.causes}
+              onChange={(e) => setForm({ ...form, causes: e.target.value })}
+            />
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Prevention</label>
+              <input
+                type="text"
+                className="input-field"
+                placeholder="Crop rotation, sanitation..."
+                value={form.prevention}
+                onChange={(e) => setForm({ ...form, prevention: e.target.value })}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Treatment</label>
+              <input
+                type="text"
+                className="input-field"
+                placeholder="Fungicide spray, copper soap..."
+                value={form.treatment}
+                onChange={(e) => setForm({ ...form, treatment: e.target.value })}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Organic Solution</label>
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Neem oil spray, bio-pesticides..."
+              value={form.organic_solution}
+              onChange={(e) => setForm({ ...form, organic_solution: e.target.value })}
+            />
+          </div>
+
+          <div>
+            <Input
+              label="Disease Image URL"
+              placeholder="https://... or /crops/... (leave empty for auto preview)"
+              value={form.image_url}
+              onChange={(e) => setForm({ ...form, image_url: e.target.value })}
+            />
+            <div className="mt-2">
+              <p className="text-xs font-medium text-slate-500 mb-1">Live Image Module Preview:</p>
+              <div className="h-36 w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 relative bg-slate-100 dark:bg-slate-800">
+                <CropImage
+                  src={form.image_url || null}
+                  alt={`${form.crop_name} ${form.disease_name}`.trim() || 'Disease Module Image'}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-700">
+            <Button variant="ghost" type="button" onClick={onClose}>
+              Cancel
+            </Button>
+            <Button type="submit" disabled={saving} icon={saving ? <LoadingSpinner size="sm" /> : <Save className="w-4 h-4" />}>
+              {saving ? 'Saving...' : 'Save Disease'}
+            </Button>
+          </div>
+        </form>
+      </motion.div>
+    </motion.div>
   );
 }
