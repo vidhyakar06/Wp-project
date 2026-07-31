@@ -28,7 +28,8 @@ const cropSlugMap: Record<string, string> = {
   'cucumber': 'https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?auto=format&fit=crop&w=600&q=80',
   'garlic': 'https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=600&q=80',
   'ginger': 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=600&q=80',
-  'gram': 'https://images.unsplash.com/photo-1515543904379-3d757afe72e3?auto=format&fit=crop&w=600&q=80',
+  'gram': '/crops/gram.png',
+
   'green gram': '/crops/green-gram.png',
 
   'groundnut': '/crops/groundnut.jpg',
