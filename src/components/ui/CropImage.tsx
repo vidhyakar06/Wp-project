@@ -44,7 +44,8 @@ const cropSlugMap: Record<string, string> = {
   'onion': 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
   'paddy': '/crops/paddy.png',
   'papaya': 'https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=600&q=80',
-  'peas': 'https://images.unsplash.com/photo-1592394533824-9440e5d68510?auto=format&fit=crop&w=600&q=80',
+  'peas': '/crops/peas.jpg',
+
   'pigeon pea': 'https://images.unsplash.com/photo-1515543904379-3d757afe72e3?auto=format&fit=crop&w=600&q=80',
   'potato': 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80',
   'radish': 'https://images.unsplash.com/photo-1593105544559-ecb03bf76f82?auto=format&fit=crop&w=600&q=80',
