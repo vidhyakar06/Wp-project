@@ -31,7 +31,8 @@ const cropSlugMap: Record<string, string> = {
   'gram': 'https://images.unsplash.com/photo-1515543904379-3d757afe72e3?auto=format&fit=crop&w=600&q=80',
   'green gram': '/crops/green-gram.png',
 
-  'groundnut': 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=600&q=80',
+  'groundnut': '/crops/groundnut.jpg',
+
 
   'jowar': 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=600&q=80',
   'jute': '/crops/jute.png',
