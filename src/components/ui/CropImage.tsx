@@ -15,13 +15,13 @@ const gradients = [
 const cropSlugMap: Record<string, string> = {
   'bajra': 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=600&q=80',
   'banana': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
-  'black gram': 'https://images.unsplash.com/photo-1515543904379-3d757afe72e3?auto=format&fit=crop&w=600&q=80',
+  'black gram': '/crops/black-gram.png',
   'brinjal': '/crops/brinjal.png',
   'cabbage': 'https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=600&q=80',
   'carrot': 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=600&q=80',
   'cauliflower': 'https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?auto=format&fit=crop&w=600&q=80',
-  'chilli': 'https://images.unsplash.com/photo-1588252303782-77d4b47d79ef?auto=format&fit=crop&w=600&q=80',
-  'coconut': 'https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=600&q=80',
+  'chilli': '/crops/chilli.png',
+  'coconut': '/crops/coconut.png',
   'coffee': '/crops/coffee.png',
   'coriander': 'https://images.unsplash.com/photo-1588879460618-9249e7d947d1?auto=format&fit=crop&w=600&q=80',
   'cotton': '/crops/cotton.png',
@@ -59,26 +59,27 @@ const cropSlugMap: Record<string, string> = {
 };
 
 const diseaseSlugMap: Record<string, string> = {
-  'anthracnose': 'https://images.unsplash.com/photo-1588252303782-77d4b47d79ef?auto=format&fit=crop&w=600&q=80',
-  'bacterial blight': 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80',
+  'anthracnose': '/crops/chilli.png',
+  'bacterial blight': '/crops/paddy-blight.png',
   'bacterial wilt': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
-  'blast': 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80',
+  'blast': 'https://images.unsplash.com/photo-1535241749838-299277b6305f?auto=format&fit=crop&w=600&q=80',
   'bollworm': '/crops/cotton.png',
   'downy mildew': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
   'early blight': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
-  'late blight': 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80',
-  'leaf curl': 'https://images.unsplash.com/photo-1588252303782-77d4b47d79ef?auto=format&fit=crop&w=600&q=80',
+  'late blight': '/crops/potato-blight.png',
+  'leaf curl': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
   'panama wilt': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
   'purple blotch': 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
   'red rot': '/crops/sugarcane.png',
-  'rust': 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80',
-  'scab': 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80',
+  'rust': '/crops/wheat-rust.png',
+  'scab': '/crops/potato-blight.png',
   'sigatoka leaf spot': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
-  'smut': 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80',
+  'smut': '/crops/wheat-smut.png',
   'stalk rot': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
   'tikka disease': 'https://images.unsplash.com/photo-1567892320421-1c657571ea48?auto=format&fit=crop&w=600&q=80',
   'yellow mosaic': '/crops/soybean.png',
 };
+
 
 function hashString(s: string): number {
   let h = 0;
