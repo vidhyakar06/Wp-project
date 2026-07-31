@@ -29,7 +29,8 @@ const cropSlugMap: Record<string, string> = {
   'garlic': 'https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=600&q=80',
   'ginger': 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=600&q=80',
   'gram': 'https://images.unsplash.com/photo-1515543904379-3d757afe72e3?auto=format&fit=crop&w=600&q=80',
-  'green gram': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80',
+  'green gram': '/crops/green-gram.png',
+
   'groundnut': 'https://images.unsplash.com/photo-1567892320421-1c657571ea48?auto=format&fit=crop&w=600&q=80',
   'jowar': 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=600&q=80',
   'jute': '/crops/jute.png',
