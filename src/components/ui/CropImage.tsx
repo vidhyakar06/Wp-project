@@ -52,7 +52,7 @@ const cropSlugMap: Record<string, string> = {
   'radish': 'https://images.unsplash.com/photo-1593105544559-ecb03bf76f82?auto=format&fit=crop&w=600&q=80',
   'ragi': 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=600&q=80',
   'rubber': 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80',
-  'sesame': 'https://images.unsplash.com/photo-1508061252966-dfd30f67ea5d?auto=format&fit=crop&w=600&q=80',
+  'sesame': '/crops/sesame.jpg',
   'soybean': '/crops/soybean.png',
   'sugarcane': '/crops/sugarcane.png',
   'sunflower': 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=600&q=80',
