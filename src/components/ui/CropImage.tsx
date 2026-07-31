@@ -12,6 +12,14 @@ const gradients = [
   'from-green-500 to-lime-600',
 ];
 
+const cropSlugMap: Record<string, string> = {
+  'brinjal': '/crops/brinjal.png',
+  'cotton': '/crops/cotton.png',
+  'paddy': '/crops/paddy.png',
+  'sugarcane': '/crops/sugarcane.png',
+  'tea': '/crops/tea.png',
+};
+
 function hashString(s: string): number {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
@@ -25,11 +33,25 @@ type CropImageProps = {
 };
 
 export default function CropImage({ src, alt, className = '' }: CropImageProps) {
-  const [failed, setFailed] = useState(false);
-  const showFallback = !src || failed;
+  const slug = alt.toLowerCase().trim();
+  const localFallback = cropSlugMap[slug] || `/crops/${slug.replace(/\s+/g, '-')}.png`;
+  
+  const [imgState, setImgState] = useState<'primary' | 'fallback' | 'failed'>('primary');
   const gradient = gradients[hashString(alt) % gradients.length];
 
-  if (showFallback) {
+  const currentSrc = imgState === 'primary' 
+    ? (src || localFallback) 
+    : (imgState === 'fallback' ? localFallback : null);
+
+  const handleError = () => {
+    if (imgState === 'primary' && currentSrc !== localFallback) {
+      setImgState('fallback');
+    } else {
+      setImgState('failed');
+    }
+  };
+
+  if (imgState === 'failed' || !currentSrc) {
     return (
       <div className={`flex items-center justify-center bg-gradient-to-br ${gradient} ${className}`}>
         <div className="flex flex-col items-center gap-1 text-white/90">
@@ -42,11 +64,12 @@ export default function CropImage({ src, alt, className = '' }: CropImageProps) 
 
   return (
     <img
-      src={src!}
+      src={currentSrc}
       alt={alt}
       loading="lazy"
-      onError={() => setFailed(true)}
+      onError={handleError}
       className={className}
     />
   );
 }
+
