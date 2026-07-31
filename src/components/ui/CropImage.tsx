@@ -58,6 +58,28 @@ const cropSlugMap: Record<string, string> = {
   'wheat': 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80',
 };
 
+const diseaseSlugMap: Record<string, string> = {
+  'anthracnose': 'https://images.unsplash.com/photo-1588252303782-77d4b47d79ef?auto=format&fit=crop&w=600&q=80',
+  'bacterial blight': 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80',
+  'bacterial wilt': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
+  'blast': 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80',
+  'bollworm': '/crops/cotton.png',
+  'downy mildew': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
+  'early blight': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
+  'late blight': 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80',
+  'leaf curl': 'https://images.unsplash.com/photo-1588252303782-77d4b47d79ef?auto=format&fit=crop&w=600&q=80',
+  'panama wilt': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
+  'purple blotch': 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
+  'red rot': '/crops/sugarcane.png',
+  'rust': 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80',
+  'scab': 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80',
+  'sigatoka leaf spot': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
+  'smut': 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80',
+  'stalk rot': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
+  'tikka disease': 'https://images.unsplash.com/photo-1567892320421-1c657571ea48?auto=format&fit=crop&w=600&q=80',
+  'yellow mosaic': '/crops/soybean.png',
+};
+
 function hashString(s: string): number {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
@@ -72,17 +94,15 @@ type CropImageProps = {
 
 export default function CropImage({ src, alt, className = '' }: CropImageProps) {
   const slug = alt.toLowerCase().trim();
-  const mappedUrl = cropSlugMap[slug];
+  const mappedUrl = cropSlugMap[slug] || diseaseSlugMap[slug];
   const localFallback = mappedUrl || `/crops/${slug.replace(/\s+/g, '-')}.png`;
   
   const [imgState, setImgState] = useState<'primary' | 'fallback' | 'failed'>('primary');
   const gradient = gradients[hashString(alt) % gradients.length];
 
-  // If DB src is a Pexels URL or if mappedUrl is a local asset (/crops/), use mappedUrl/localFallback immediately
+  // Always prefer mappedUrl if available (since Pexels URLs in DB can fail or be unmapped)
   const isPexelsSrc = src && src.includes('pexels.com');
-  const isLocalAsset = mappedUrl && mappedUrl.startsWith('/crops/');
-  const initialSrc = (isLocalAsset || (isPexelsSrc && mappedUrl)) ? mappedUrl : (src || localFallback);
-
+  const initialSrc = mappedUrl || (isPexelsSrc ? null : src) || localFallback;
 
   const currentSrc = imgState === 'primary' 
     ? initialSrc 
@@ -117,5 +137,6 @@ export default function CropImage({ src, alt, className = '' }: CropImageProps) 
     />
   );
 }
+
 
 
