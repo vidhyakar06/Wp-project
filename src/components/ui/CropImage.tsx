@@ -60,26 +60,63 @@ const cropSlugMap: Record<string, string> = {
 
 const diseaseSlugMap: Record<string, string> = {
   'anthracnose': '/crops/chilli.png',
-  'bacterial blight': '/crops/paddy-blight.png',
-  'bacterial wilt': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
-  'blast': 'https://images.unsplash.com/photo-1535241749838-299277b6305f?auto=format&fit=crop&w=600&q=80',
-  'bollworm': '/crops/cotton.png',
-  'downy mildew': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
-  'early blight': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
-  'late blight': '/crops/potato-blight.png',
-  'leaf curl': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
-  'panama wilt': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
-  'purple blotch': 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
-  'red rot': '/crops/sugarcane.png',
-  'rust': '/crops/wheat-rust.png',
-  'scab': '/crops/potato-blight.png',
-  'sigatoka leaf spot': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
-  'smut': '/crops/wheat-smut.png',
-  'stalk rot': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
-  'tikka disease': 'https://images.unsplash.com/photo-1567892320421-1c657571ea48?auto=format&fit=crop&w=600&q=80',
-  'yellow mosaic': '/crops/soybean.png',
-};
+  'chilli anthracnose': '/crops/chilli.png',
 
+  'bacterial blight': '/crops/paddy-blight.png',
+  'paddy bacterial blight': '/crops/paddy-blight.png',
+
+  'bacterial wilt': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
+  'tomato bacterial wilt': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
+
+  'blast': 'https://images.unsplash.com/photo-1535241749838-299277b6305f?auto=format&fit=crop&w=600&q=80',
+  'paddy blast': 'https://images.unsplash.com/photo-1535241749838-299277b6305f?auto=format&fit=crop&w=600&q=80',
+
+  'bollworm': '/crops/cotton.png',
+  'cotton bollworm': '/crops/cotton.png',
+
+  'downy mildew': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
+  'maize downy mildew': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
+
+  'early blight': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
+  'tomato early blight': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
+
+  'late blight': '/crops/potato-blight.png',
+  'potato late blight': '/crops/potato-blight.png',
+
+  'leaf curl': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
+  'cotton leaf curl': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
+  'chilli leaf curl': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
+
+  'panama wilt': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
+  'banana panama wilt': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
+
+  'purple blotch': 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
+  'onion purple blotch': 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
+
+  'red rot': '/crops/sugarcane.png',
+  'sugarcane red rot': '/crops/sugarcane.png',
+
+  'rust': '/crops/wheat-rust.png',
+  'wheat rust': '/crops/wheat-rust.png',
+
+  'scab': '/crops/potato-blight.png',
+  'potato scab': '/crops/potato-blight.png',
+
+  'sigatoka leaf spot': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
+  'banana sigatoka leaf spot': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80',
+
+  'smut': '/crops/wheat-smut.png',
+  'wheat smut': '/crops/wheat-smut.png',
+
+  'stalk rot': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
+  'maize stalk rot': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
+
+  'tikka disease': 'https://images.unsplash.com/photo-1567892320421-1c657571ea48?auto=format&fit=crop&w=600&q=80',
+  'groundnut tikka disease': 'https://images.unsplash.com/photo-1567892320421-1c657571ea48?auto=format&fit=crop&w=600&q=80',
+
+  'yellow mosaic': '/crops/soybean.png',
+  'soybean yellow mosaic': '/crops/soybean.png',
+};
 
 function hashString(s: string): number {
   let h = 0;
@@ -104,6 +141,7 @@ export default function CropImage({ src, alt, className = '' }: CropImageProps) 
   // Always prefer mappedUrl if available (since Pexels URLs in DB can fail or be unmapped)
   const isPexelsSrc = src && src.includes('pexels.com');
   const initialSrc = mappedUrl || (isPexelsSrc ? null : src) || localFallback;
+
 
   const currentSrc = imgState === 'primary' 
     ? initialSrc 

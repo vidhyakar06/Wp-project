@@ -70,7 +70,7 @@ export default function Diseases() {
             >
               <Card className="overflow-hidden cursor-pointer">
                 <div className="relative h-40">
-                  <CropImage src={disease.image_url} alt={disease.disease_name} className="w-full h-full object-cover" />
+                  <CropImage src={disease.image_url} alt={`${disease.crop_name} ${disease.disease_name}`} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-3 right-3">
                     <div className="flex items-center gap-2 mb-1">
@@ -113,7 +113,8 @@ export default function Diseases() {
             className="glass-card max-w-2xl w-full max-h-[85vh] overflow-y-auto"
           >
             <div className="relative h-48">
-              <CropImage src={selected.image_url} alt={selected.disease_name} className="w-full h-full object-cover" />
+              <CropImage src={selected.image_url} alt={`${selected.crop_name} ${selected.disease_name}`} className="w-full h-full object-cover" />
+
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               <button
                 onClick={() => setSelected(null)}
