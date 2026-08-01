@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bug, Search, AlertCircle, Shield, FlaskRound, Leaf, Eye, Calendar, Plus, X, Save } from 'lucide-react';
-import { supabase, type Disease } from '../lib/supabase';
+import { Bug, Search, AlertCircle, Shield, FlaskRound, Leaf, Eye, Calendar, Plus, X, Save, Layers, Filter } from 'lucide-react';
+import { supabase, type Disease, type Crop, type FarmDetail } from '../lib/supabase';
+import { useAuth } from '../context/AuthContext';
 import PageHeader from '../components/ui/PageHeader';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -9,26 +10,62 @@ import { Input, Select } from '../components/ui/Input';
 import { EmptyState, LoadingSpinner } from '../components/ui/Loading';
 import CropImage from '../components/ui/CropImage';
 
+const soilTypes = ['All Soil Types', 'Loamy', 'Sandy', 'Clay', 'Black', 'Red', 'Alluvial', 'Laterite'];
+
 export default function Diseases() {
+  const { session } = useAuth();
   const [loading, setLoading] = useState(true);
   const [diseases, setDiseases] = useState<Disease[]>([]);
+  const [crops, setCrops] = useState<Crop[]>([]);
+  const [userSoilType, setUserSoilType] = useState<string | null>(null);
+  const [selectedSoil, setSelectedSoil] = useState<string>('All Soil Types');
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState<Disease | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
-    const fetchDiseases = async () => {
-      const { data } = await supabase.from('diseases').select('*').order('crop_name');
-      setDiseases(data || []);
+    const fetchData = async () => {
+      const [diseaseRes, cropRes, farmRes] = await Promise.all([
+        supabase.from('diseases').select('*').order('crop_name'),
+        supabase.from('crops').select('crop_name, soil_type'),
+        session?.user?.id
+          ? supabase.from('farm_details').select('soil_type').eq('farmer_id', session.user.id).order('created_at', { ascending: false }).maybeSingle()
+          : Promise.resolve({ data: null }),
+      ]);
+      setDiseases(diseaseRes.data || []);
+      setCrops((cropRes.data as Crop[]) || []);
+      if (farmRes.data?.soil_type) {
+        setUserSoilType(farmRes.data.soil_type);
+      }
       setLoading(false);
     };
-    fetchDiseases();
-  }, []);
+    fetchData();
+  }, [session?.user?.id]);
 
-  const filtered = diseases.filter((d) =>
-    d.crop_name.toLowerCase().includes(search.toLowerCase()) ||
-    d.disease_name.toLowerCase().includes(search.toLowerCase())
-  );
+  // Build map of crop_name -> soil_type
+  const cropSoilMap: Record<string, string> = {};
+  crops.forEach((c) => {
+    if (c.crop_name && c.soil_type) {
+      cropSoilMap[c.crop_name.toLowerCase()] = c.soil_type;
+    }
+  });
+
+  const filtered = diseases.filter((d) => {
+    const matchesSearch =
+      d.crop_name.toLowerCase().includes(search.toLowerCase()) ||
+      d.disease_name.toLowerCase().includes(search.toLowerCase());
+
+    if (!matchesSearch) return false;
+
+    if (selectedSoil !== 'All Soil Types') {
+      const cropSoil = cropSoilMap[d.crop_name.toLowerCase()] || '';
+      if (!cropSoil.toLowerCase().includes(selectedSoil.toLowerCase())) {
+        return false;
+      }
+    }
+
+    return true;
+  });
 
   const handleDiseaseAdded = (newDisease: Disease) => {
     setDiseases((prev) => [newDisease, ...prev]);
@@ -55,60 +92,116 @@ export default function Diseases() {
         }
       />
 
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-        <div className="relative w-full max-w-md">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-6">
+        <div className="relative w-full md:w-80">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Search by crop or disease name..."
+            placeholder="Search crop or disease name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="input-field pl-10"
           />
         </div>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-2">
+            <Filter className="w-4 h-4 text-slate-400" />
+            <select
+              value={selectedSoil}
+              onChange={(e) => setSelectedSoil(e.target.value)}
+              className="input-field py-2 text-sm max-w-[180px]"
+            >
+              {soilTypes.map((st) => (
+                <option key={st} value={st}>
+                  {st}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {userSoilType && (
+            <button
+              onClick={() => setSelectedSoil(selectedSoil === userSoilType ? 'All Soil Types' : userSoilType)}
+              className={`px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                selectedSoil === userSoilType
+                  ? 'bg-primary-600 text-white shadow-sm'
+                  : 'bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 border border-primary-200 dark:border-primary-800'
+              }`}
+            >
+              <Layers className="w-3.5 h-3.5" />
+              My Farm Soil: {userSoilType}
+            </button>
+          )}
+        </div>
       </div>
 
       {filtered.length === 0 ? (
         <Card className="p-6">
-          <EmptyState icon={<Bug className="w-10 h-10" />} title="No Diseases Matched Your Search" message="Try searching with a different crop or disease name." />
+          <EmptyState
+            icon={<Bug className="w-10 h-10" />}
+            title="No Diseases Matched Your Search"
+            message={`No disease found matching "${search || selectedSoil}". Try selecting a different soil type or clearing filters.`}
+          />
         </Card>
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((disease, i) => (
-            <motion.div
-              key={disease.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-              onClick={() => setSelected(disease)}
-            >
-              <Card className="overflow-hidden cursor-pointer">
-                <div className="relative h-40">
-                  <CropImage src={disease.image_url} alt={`${disease.crop_name} ${disease.disease_name}`} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="inline-block px-2.5 py-1 rounded-full bg-white/90 dark:bg-slate-800/90 text-xs font-medium text-primary-600">
-                        {disease.crop_name}
+          {filtered.map((disease, i) => {
+            const cropSoil = cropSoilMap[disease.crop_name.toLowerCase()];
+            const isUserSoilMatch = userSoilType && cropSoil && cropSoil.toLowerCase().includes(userSoilType.toLowerCase());
+
+            return (
+              <motion.div
+                key={disease.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+                onClick={() => setSelected(disease)}
+              >
+                <Card className="overflow-hidden cursor-pointer hover:shadow-lg transition-shadow">
+                  <div className="relative h-40">
+                    <CropImage src={disease.image_url} alt={`${disease.crop_name} ${disease.disease_name}`} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-3 left-3 right-3">
+                      <div className="flex flex-wrap items-center gap-1.5 mb-1">
+                        <span className="inline-block px-2.5 py-0.5 rounded-full bg-white/90 dark:bg-slate-800/90 text-xs font-medium text-primary-600">
+                          {disease.crop_name}
+                        </span>
+                        {cropSoil && (
+                          <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-semibold ${
+                            isUserSoilMatch
+                              ? 'bg-emerald-500 text-white'
+                              : 'bg-slate-800/80 text-amber-300'
+                          }`}>
+                            Soil: {cropSoil}
+                          </span>
+                        )}
+                        {disease.season && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-500/90 text-xs font-medium text-white">
+                            <Calendar className="w-3 h-3" /> {disease.season}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-white font-bold text-lg">{disease.disease_name}</h3>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">{disease.symptoms}</p>
+                    <div className="flex items-center justify-between text-xs font-medium mt-3">
+                      <span className="flex items-center gap-1 text-primary-600">
+                        <Eye className="w-3.5 h-3.5" /> View Details
                       </span>
-                      {disease.season && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/90 text-xs font-medium text-white">
-                          <Calendar className="w-3 h-3" /> {disease.season}
+                      {isUserSoilMatch && (
+                        <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                          ✓ Fits Your Soil
                         </span>
                       )}
                     </div>
-                    <h3 className="text-white font-bold text-lg">{disease.disease_name}</h3>
                   </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">{disease.symptoms}</p>
-                  <div className="flex items-center gap-1 text-xs text-primary-600 font-medium mt-3">
-                    <Eye className="w-3.5 h-3.5" /> View Details
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
       )}
 

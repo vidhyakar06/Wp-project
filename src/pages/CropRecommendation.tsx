@@ -48,13 +48,36 @@ export default function CropRecommendation() {
 
     // Soil type match (30%)
     total += 30;
-    if (crop.soil_type === farm.soil_type) score += 30;
-    else if (crop.soil_type === 'Loamy' && farm.soil_type === 'Alluvial') score += 20;
+    const cropSoil = (crop.soil_type || '').toLowerCase().trim();
+    const farmSoil = (farm.soil_type || '').toLowerCase().trim();
+
+    if (cropSoil === farmSoil) {
+      score += 30;
+    } else if (
+      (cropSoil === 'loamy' && farmSoil === 'alluvial') ||
+      (cropSoil === 'alluvial' && farmSoil === 'loamy') ||
+      (cropSoil === 'black' && farmSoil === 'clay') ||
+      (cropSoil === 'clay' && farmSoil === 'black') ||
+      (cropSoil === 'red' && farmSoil === 'laterite') ||
+      (cropSoil === 'laterite' && farmSoil === 'red')
+    ) {
+      score += 22;
+    } else if (
+      (cropSoil === 'sandy' && farmSoil === 'loamy') ||
+      (cropSoil === 'loamy' && farmSoil === 'sandy')
+    ) {
+      score += 15;
+    }
 
     // Season match (25%)
     total += 25;
-    if (crop.suitable_season === farm.current_season) score += 25;
-    else if (crop.suitable_season === 'All') score += 15;
+    const cropSeason = (crop.suitable_season || '').toLowerCase();
+    const farmSeason = (farm.current_season || '').toLowerCase();
+    if (cropSeason === farmSeason || cropSeason === 'all seasons' || cropSeason === 'all') {
+      score += 25;
+    } else if (farmSeason.includes(cropSeason) || cropSeason.includes(farmSeason)) {
+      score += 20;
+    }
 
     // Temperature match (20%)
     total += 20;
