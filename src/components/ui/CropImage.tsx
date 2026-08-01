@@ -73,8 +73,8 @@ const diseaseSlugMap: Record<string, string> = {
   'bacterial blight': '/crops/paddy-blight.png',
   'paddy bacterial blight': '/crops/paddy-blight.png',
 
-  'bacterial wilt': 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80',
-  'tomato bacterial wilt': 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80',
+  'bacterial wilt': 'https://extension.usu.edu/planthealth/ipm/images/agricultural/vegetables/Bacterial-wilt-2.jpg',
+  'tomato bacterial wilt': 'https://extension.usu.edu/planthealth/ipm/images/agricultural/vegetables/Bacterial-wilt-2.jpg',
 
   'blast': 'https://izumibiosciences.in/wp-content/uploads/2023/06/Rice-Blast-Disease-Symptoms-Signs-Disease-Cycle-and-Management.png',
   'paddy blast': 'https://izumibiosciences.in/wp-content/uploads/2023/06/Rice-Blast-Disease-Symptoms-Signs-Disease-Cycle-and-Management.png',
