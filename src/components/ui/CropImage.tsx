@@ -91,7 +91,7 @@ const diseaseSlugMap: Record<string, string> = {
   'late blight': '/crops/potato-blight.png',
   'potato late blight': '/crops/potato-blight.png',
 
-  'leaf curl': 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80',
+  'leaf curl': 'https://www.ecoorganicgarden.com.au/media/vankxqvx/leaf-curl-lr.jpg?rmode=max&ranchor=center&width=850&height=450',
   'cotton leaf curl': '/crops/cotton.png',
   'chilli leaf curl': 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80',
 
@@ -129,6 +129,7 @@ const diseaseSlugMap: Record<string, string> = {
 const secondaryFallbackMap: Record<string, string> = {
   'anthracnose': '/crops/anthracnose.png',
   'chilli anthracnose': '/crops/anthracnose.png',
+  'leaf curl': '/crops/leaf-curl.png',
   'panama wilt': '/crops/panama-wilt.png',
   'banana panama wilt': '/crops/panama-wilt.png',
   'sigatoka leaf spot': '/crops/sigatoka-leaf-spot.png',
