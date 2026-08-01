@@ -119,8 +119,8 @@ const diseaseSlugMap: Record<string, string> = {
   'stalk rot': 'https://images.unsplash.com/photo-1601593346740-925612772716?auto=format&fit=crop&w=600&q=80',
   'maize stalk rot': 'https://images.unsplash.com/photo-1601593346740-925612772716?auto=format&fit=crop&w=600&q=80',
 
-  'tikka disease': '/crops/groundnut.jpg',
-  'groundnut tikka disease': '/crops/groundnut.jpg',
+  'tikka disease': 'https://cdn.jiokrishi.com/KMSOPEN/website/images/resource-blog-image-groundnut.webp',
+  'groundnut tikka disease': 'https://cdn.jiokrishi.com/KMSOPEN/website/images/resource-blog-image-groundnut.webp',
 
   'yellow mosaic': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
   'soybean yellow mosaic': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
@@ -136,6 +136,8 @@ const secondaryFallbackMap: Record<string, string> = {
   'banana panama wilt': '/crops/panama-wilt.png',
   'sigatoka leaf spot': '/crops/sigatoka-leaf-spot.png',
   'banana sigatoka leaf spot': '/crops/sigatoka-leaf-spot.png',
+  'tikka disease': '/crops/groundnut.jpg',
+  'groundnut tikka disease': '/crops/groundnut.jpg',
 };
 
 function hashString(s: string): number {
