@@ -85,8 +85,9 @@ const diseaseSlugMap: Record<string, string> = {
   'downy mildew': 'https://images.squarespace-cdn.com/content/v1/56bb6533c2ea51c6431244f6/1599151391871-NVDCI57UYQQW2FEKIWUD/Topical+view+of+cucumber+downy+mildew+IMG_2508.jpg',
   'maize downy mildew': 'https://images.squarespace-cdn.com/content/v1/56bb6533c2ea51c6431244f6/1599151391871-NVDCI57UYQQW2FEKIWUD/Topical+view+of+cucumber+downy+mildew+IMG_2508.jpg',
 
-  'early blight': 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=600&q=80',
-  'tomato early blight': 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=600&q=80',
+  'early blight': 'https://vegpath.plantpath.wisc.edu/wp-content/uploads/sites/342/2023/11/potato-early-blight-leaves.jpg',
+  'tomato early blight': 'https://vegpath.plantpath.wisc.edu/wp-content/uploads/sites/342/2023/11/potato-early-blight-leaves.jpg',
+  'potato early blight': 'https://vegpath.plantpath.wisc.edu/wp-content/uploads/sites/342/2023/11/potato-early-blight-leaves.jpg',
 
   'late blight': '/crops/potato-blight.png',
   'potato late blight': '/crops/potato-blight.png',
