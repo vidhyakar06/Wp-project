@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Sprout, Search, Download, Calendar, Droplets, Thermometer,
-  FlaskConical, TrendingUp, FileText, Loader2,
+  FlaskConical, TrendingUp, FileText, Loader2, Plus, Edit3,
 } from 'lucide-react';
 import jsPDF from 'jspdf';
 import { supabase, type Crop, type FarmDetail } from '../lib/supabase';
@@ -35,8 +35,19 @@ export default function CropRecommendation() {
         supabase.from('farm_details').select('*').eq('farmer_id', session.user.id).order('created_at', { ascending: false }).maybeSingle(),
         supabase.from('crops').select('*'),
       ]);
-      setFarmData(farm.data as FarmDetail | null);
-      setAllCrops(crops.data || []);
+      const currentFarm = farm.data as FarmDetail | null;
+      const cropsList = crops.data || [];
+      setFarmData(currentFarm);
+      setAllCrops(cropsList);
+
+      if (currentFarm && cropsList.length > 0) {
+        const scored = cropsList
+          .map((crop) => ({ ...crop, confidence: calculateConfidence(crop, currentFarm) }))
+          .filter((c) => c.confidence > 0)
+          .sort((a, b) => b.confidence - a.confidence)
+          .slice(0, 12);
+        setResults(scored);
+      }
       setLoading(false);
     };
     fetchFarmAndCrops();
@@ -189,12 +200,23 @@ export default function CropRecommendation() {
         subtitle="Get smart crop suggestions based on your farm conditions"
         icon={<Sprout className="w-6 h-6" />}
         action={
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant="outline"
+              onClick={() => navigate('/farm-details')}
+              icon={farmData ? <Edit3 className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+            >
+              {farmData ? 'Edit Farm Data' : 'Add Farm Data'}
+            </Button>
+
             {results.length > 0 && (
-              <Button variant="outline" onClick={handleDownloadPDF} icon={<Download className="w-4 h-4" />}>PDF</Button>
+              <Button variant="outline" onClick={handleDownloadPDF} icon={<Download className="w-4 h-4" />}>
+                PDF
+              </Button>
             )}
+
             <Button onClick={handleRecommend} disabled={analyzing} icon={analyzing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}>
-              {analyzing ? 'Finding best crops...' : 'Get Crop Suggestions'}
+              {analyzing ? 'Finding best crops...' : 'Re-calculate Suggestions'}
             </Button>
           </div>
         }
