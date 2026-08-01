@@ -76,8 +76,8 @@ const diseaseSlugMap: Record<string, string> = {
   'bacterial wilt': 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80',
   'tomato bacterial wilt': 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80',
 
-  'blast': 'https://agritech.tnau.ac.in/crop_protection/images/paddy/blast2.jpg',
-  'paddy blast': 'https://agritech.tnau.ac.in/crop_protection/images/paddy/blast2.jpg',
+  'blast': 'https://izumibiosciences.in/wp-content/uploads/2023/06/Rice-Blast-Disease-Symptoms-Signs-Disease-Cycle-and-Management.png',
+  'paddy blast': 'https://izumibiosciences.in/wp-content/uploads/2023/06/Rice-Blast-Disease-Symptoms-Signs-Disease-Cycle-and-Management.png',
 
   'bollworm': '/crops/cotton-bollworm.png',
   'cotton bollworm': '/crops/cotton-bollworm.png',
