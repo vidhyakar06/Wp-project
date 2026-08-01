@@ -98,8 +98,8 @@ const diseaseSlugMap: Record<string, string> = {
   'panama wilt': 'https://www.cpsskerala.in/OPC/images/crops/Banana/Diseases/14.jpg',
   'banana panama wilt': 'https://www.cpsskerala.in/OPC/images/crops/Banana/Diseases/14.jpg',
 
-  'purple blotch': 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
-  'onion purple blotch': 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
+  'purple blotch': 'https://agritech.tnau.ac.in/crop_protection/images/onion_ph_diseases/5.onionpurpleblotch3.jpg',
+  'onion purple blotch': 'https://agritech.tnau.ac.in/crop_protection/images/onion_ph_diseases/5.onionpurpleblotch3.jpg',
 
   'red rot': '/crops/sugarcane.png',
   'sugarcane red rot': '/crops/sugarcane.png',
@@ -136,6 +136,8 @@ const secondaryFallbackMap: Record<string, string> = {
   'leaf curl': '/crops/leaf-curl.png',
   'panama wilt': '/crops/panama-wilt.png',
   'banana panama wilt': '/crops/panama-wilt.png',
+  'purple blotch': '/crops/purple-blotch.png',
+  'onion purple blotch': '/crops/purple-blotch.png',
   'sigatoka leaf spot': '/crops/sigatoka-leaf-spot.png',
   'banana sigatoka leaf spot': '/crops/sigatoka-leaf-spot.png',
   'stalk rot': '/crops/stalk-rot.png',
