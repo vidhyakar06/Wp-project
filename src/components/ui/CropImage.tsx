@@ -116,8 +116,8 @@ const diseaseSlugMap: Record<string, string> = {
   'smut': '/crops/wheat-smut.png',
   'wheat smut': '/crops/wheat-smut.png',
 
-  'stalk rot': 'https://images.unsplash.com/photo-1601593346740-925612772716?auto=format&fit=crop&w=600&q=80',
-  'maize stalk rot': 'https://images.unsplash.com/photo-1601593346740-925612772716?auto=format&fit=crop&w=600&q=80',
+  'stalk rot': 'https://content.peat-cloud.com/thumbnails/bacterial-stalk-rot-of-maize-1.jpg',
+  'maize stalk rot': 'https://content.peat-cloud.com/thumbnails/bacterial-stalk-rot-of-maize-1.jpg',
 
   'tikka disease': 'https://blog.apnikheti.com/wp-content/uploads/2019/03/injury-_richard-rhodes_800x400.jpg',
   'groundnut tikka disease': 'https://blog.apnikheti.com/wp-content/uploads/2019/03/injury-_richard-rhodes_800x400.jpg',
@@ -138,6 +138,8 @@ const secondaryFallbackMap: Record<string, string> = {
   'banana panama wilt': '/crops/panama-wilt.png',
   'sigatoka leaf spot': '/crops/sigatoka-leaf-spot.png',
   'banana sigatoka leaf spot': '/crops/sigatoka-leaf-spot.png',
+  'stalk rot': '/crops/stalk-rot.png',
+  'maize stalk rot': '/crops/stalk-rot.png',
   'tikka disease': '/crops/groundnut.jpg',
   'groundnut tikka disease': '/crops/groundnut.jpg',
 };
