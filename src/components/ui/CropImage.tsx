@@ -67,8 +67,8 @@ const cropSlugMap: Record<string, string> = {
 const defaultFarmImage = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80';
 
 const diseaseSlugMap: Record<string, string> = {
-  'anthracnose': '/crops/chilli.png',
-  'chilli anthracnose': '/crops/chilli.png',
+  'anthracnose': 'https://blog.plantwise.org/wp-content/uploads/sites/7/2022/06/1.jpg',
+  'chilli anthracnose': 'https://blog.plantwise.org/wp-content/uploads/sites/7/2022/06/1.jpg',
 
   'bacterial blight': '/crops/paddy-blight.png',
   'paddy bacterial blight': '/crops/paddy-blight.png',
@@ -127,6 +127,8 @@ const diseaseSlugMap: Record<string, string> = {
 };
 
 const secondaryFallbackMap: Record<string, string> = {
+  'anthracnose': '/crops/anthracnose.png',
+  'chilli anthracnose': '/crops/anthracnose.png',
   'panama wilt': '/crops/panama-wilt.png',
   'banana panama wilt': '/crops/panama-wilt.png',
   'sigatoka leaf spot': '/crops/sigatoka-leaf-spot.png',
