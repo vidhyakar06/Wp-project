@@ -79,8 +79,8 @@ const diseaseSlugMap: Record<string, string> = {
   'blast': '/crops/paddy.png',
   'paddy blast': '/crops/paddy.png',
 
-  'bollworm': 'https://images.unsplash.com/photo-1533038590840-1cde6e668a91?auto=format&fit=crop&w=600&q=80',
-  'cotton bollworm': 'https://images.unsplash.com/photo-1533038590840-1cde6e668a91?auto=format&fit=crop&w=600&q=80',
+  'bollworm': '/crops/cotton-bollworm.png',
+  'cotton bollworm': '/crops/cotton-bollworm.png',
 
   'downy mildew': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
   'maize downy mildew': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
@@ -129,6 +129,8 @@ const diseaseSlugMap: Record<string, string> = {
 const secondaryFallbackMap: Record<string, string> = {
   'anthracnose': '/crops/anthracnose.png',
   'chilli anthracnose': '/crops/anthracnose.png',
+  'bollworm': '/crops/cotton-bollworm.png',
+  'cotton bollworm': '/crops/cotton-bollworm.png',
   'leaf curl': '/crops/leaf-curl.png',
   'panama wilt': '/crops/panama-wilt.png',
   'banana panama wilt': '/crops/panama-wilt.png',
