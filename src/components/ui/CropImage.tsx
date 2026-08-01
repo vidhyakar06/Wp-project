@@ -107,8 +107,9 @@ const diseaseSlugMap: Record<string, string> = {
   'rust': '/crops/wheat-rust.png',
   'wheat rust': '/crops/wheat-rust.png',
 
-  'scab': 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80',
-  'potato scab': 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80',
+  'scab': 'https://extension.umd.edu/sites/extension.umd.edu/files/styles/optimized/public/2021-03/hgic_trees_apple_scab_on_crabapple--2064-69-slide.jpg?itok=G0aqLViS',
+  'apple scab': 'https://extension.umd.edu/sites/extension.umd.edu/files/styles/optimized/public/2021-03/hgic_trees_apple_scab_on_crabapple--2064-69-slide.jpg?itok=G0aqLViS',
+  'potato scab': 'https://extension.umd.edu/sites/extension.umd.edu/files/styles/optimized/public/2021-03/hgic_trees_apple_scab_on_crabapple--2064-69-slide.jpg?itok=G0aqLViS',
 
   'sigatoka leaf spot': 'https://agritech.tnau.ac.in/crop_protection/images/banana_diseases/8.2.jpg',
   'banana sigatoka leaf spot': 'https://agritech.tnau.ac.in/crop_protection/images/banana_diseases/8.2.jpg',
@@ -140,6 +141,9 @@ const secondaryFallbackMap: Record<string, string> = {
   'banana panama wilt': '/crops/panama-wilt.png',
   'purple blotch': '/crops/purple-blotch.png',
   'onion purple blotch': '/crops/purple-blotch.png',
+  'scab': '/crops/paddy.png',
+  'apple scab': '/crops/paddy.png',
+  'potato scab': '/crops/paddy.png',
   'sigatoka leaf spot': '/crops/sigatoka-leaf-spot.png',
   'banana sigatoka leaf spot': '/crops/sigatoka-leaf-spot.png',
   'stalk rot': '/crops/stalk-rot.png',
