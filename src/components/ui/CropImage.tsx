@@ -95,8 +95,8 @@ const diseaseSlugMap: Record<string, string> = {
   'cotton leaf curl': '/crops/cotton.png',
   'chilli leaf curl': 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80',
 
-  'panama wilt': 'https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&w=600&q=80',
-  'banana panama wilt': 'https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&w=600&q=80',
+  'panama wilt': 'https://www.cpsskerala.in/OPC/images/crops/Banana/Diseases/14.jpg',
+  'banana panama wilt': 'https://www.cpsskerala.in/OPC/images/crops/Banana/Diseases/14.jpg',
 
   'purple blotch': 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
   'onion purple blotch': 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
@@ -126,6 +126,11 @@ const diseaseSlugMap: Record<string, string> = {
   'soybean yellow mosaic': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
 };
 
+const secondaryFallbackMap: Record<string, string> = {
+  'panama wilt': '/crops/panama-wilt.png',
+  'banana panama wilt': '/crops/panama-wilt.png',
+};
+
 function hashString(s: string): number {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
@@ -142,6 +147,7 @@ export default function CropImage({ src, alt, className = '' }: CropImageProps) 
   const slug = alt.toLowerCase().trim();
   const mappedUrl = cropSlugMap[slug] || diseaseSlugMap[slug];
   const localFallback = mappedUrl || defaultFarmImage;
+  const secondary = secondaryFallbackMap[slug] || (mappedUrl !== defaultFarmImage ? defaultFarmImage : null);
   
   const [imgState, setImgState] = useState<'primary' | 'fallback' | 'failed'>('primary');
   const gradient = gradients[hashString(alt) % gradients.length];
@@ -152,10 +158,10 @@ export default function CropImage({ src, alt, className = '' }: CropImageProps) 
 
   const currentSrc = imgState === 'primary' 
     ? initialSrc 
-    : (imgState === 'fallback' ? localFallback : null);
+    : (imgState === 'fallback' ? (secondary || localFallback) : null);
 
   const handleError = () => {
-    if (imgState === 'primary' && currentSrc !== localFallback) {
+    if (imgState === 'primary' && secondary && secondary !== initialSrc) {
       setImgState('fallback');
     } else {
       setImgState('failed');
