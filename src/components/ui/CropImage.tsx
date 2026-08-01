@@ -76,8 +76,8 @@ const diseaseSlugMap: Record<string, string> = {
   'bacterial wilt': 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80',
   'tomato bacterial wilt': 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80',
 
-  'blast': '/crops/paddy.png',
-  'paddy blast': '/crops/paddy.png',
+  'blast': 'https://agritech.tnau.ac.in/crop_protection/images/paddy/blast2.jpg',
+  'paddy blast': 'https://agritech.tnau.ac.in/crop_protection/images/paddy/blast2.jpg',
 
   'bollworm': '/crops/cotton-bollworm.png',
   'cotton bollworm': '/crops/cotton-bollworm.png',
@@ -129,6 +129,8 @@ const diseaseSlugMap: Record<string, string> = {
 const secondaryFallbackMap: Record<string, string> = {
   'anthracnose': '/crops/anthracnose.png',
   'chilli anthracnose': '/crops/anthracnose.png',
+  'blast': '/crops/paddy.png',
+  'paddy blast': '/crops/paddy.png',
   'bollworm': '/crops/cotton-bollworm.png',
   'cotton bollworm': '/crops/cotton-bollworm.png',
   'downy mildew': '/crops/downy-mildew.png',
