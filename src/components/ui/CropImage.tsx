@@ -119,8 +119,8 @@ const diseaseSlugMap: Record<string, string> = {
   'stalk rot': 'https://images.unsplash.com/photo-1601593346740-925612772716?auto=format&fit=crop&w=600&q=80',
   'maize stalk rot': 'https://images.unsplash.com/photo-1601593346740-925612772716?auto=format&fit=crop&w=600&q=80',
 
-  'tikka disease': 'https://cdn.jiokrishi.com/KMSOPEN/website/images/resource-blog-image-groundnut.webp',
-  'groundnut tikka disease': 'https://cdn.jiokrishi.com/KMSOPEN/website/images/resource-blog-image-groundnut.webp',
+  'tikka disease': 'https://blog.apnikheti.com/wp-content/uploads/2019/03/injury-_richard-rhodes_800x400.jpg',
+  'groundnut tikka disease': 'https://blog.apnikheti.com/wp-content/uploads/2019/03/injury-_richard-rhodes_800x400.jpg',
 
   'yellow mosaic': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
   'soybean yellow mosaic': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
