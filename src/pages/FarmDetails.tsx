@@ -97,8 +97,11 @@ export default function FarmDetails() {
     if (!form.phosphorus) e.phosphorus = 'Required';
     if (!form.potassium) e.potassium = 'Required';
     if (!form.rainfall) e.rainfall = 'Required';
+    else if (Number(form.rainfall) < 0 || Number(form.rainfall) > 5000) e.rainfall = 'Rainfall must be 0-5000mm';
     if (!form.temperature) e.temperature = 'Required';
+    else if (Number(form.temperature) < -10 || Number(form.temperature) > 60) e.temperature = 'Temperature must be -10°C to 60°C';
     if (!form.humidity) e.humidity = 'Required';
+    else if (Number(form.humidity) < 0 || Number(form.humidity) > 100) e.humidity = 'Humidity must be 0-100%';
     if (!form.water_availability) e.water_availability = 'Required';
     if (!form.current_season) e.current_season = 'Required';
     setErrors(e);
