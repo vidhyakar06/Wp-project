@@ -123,8 +123,9 @@ const diseaseSlugMap: Record<string, string> = {
   'tikka disease': 'https://blog.apnikheti.com/wp-content/uploads/2019/03/injury-_richard-rhodes_800x400.jpg',
   'groundnut tikka disease': 'https://blog.apnikheti.com/wp-content/uploads/2019/03/injury-_richard-rhodes_800x400.jpg',
 
-  'yellow mosaic': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
-  'soybean yellow mosaic': 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
+  'yellow mosaic': 'https://content.peat-cloud.com/thumbnails/mungbean-yellow-mosaic-virus-2.jpg',
+  'soybean yellow mosaic': 'https://content.peat-cloud.com/thumbnails/mungbean-yellow-mosaic-virus-2.jpg',
+  'mungbean yellow mosaic': 'https://content.peat-cloud.com/thumbnails/mungbean-yellow-mosaic-virus-2.jpg',
 };
 
 const secondaryFallbackMap: Record<string, string> = {
