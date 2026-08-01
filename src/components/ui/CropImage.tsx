@@ -82,8 +82,8 @@ const diseaseSlugMap: Record<string, string> = {
   'bollworm': '/crops/cotton-bollworm.png',
   'cotton bollworm': '/crops/cotton-bollworm.png',
 
-  'downy mildew': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
-  'maize downy mildew': 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80',
+  'downy mildew': 'https://images.squarespace-cdn.com/content/v1/56bb6533c2ea51c6431244f6/1599151391871-NVDCI57UYQQW2FEKIWUD/Topical+view+of+cucumber+downy+mildew+IMG_2508.jpg',
+  'maize downy mildew': 'https://images.squarespace-cdn.com/content/v1/56bb6533c2ea51c6431244f6/1599151391871-NVDCI57UYQQW2FEKIWUD/Topical+view+of+cucumber+downy+mildew+IMG_2508.jpg',
 
   'early blight': 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=600&q=80',
   'tomato early blight': 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=600&q=80',
@@ -131,6 +131,8 @@ const secondaryFallbackMap: Record<string, string> = {
   'chilli anthracnose': '/crops/anthracnose.png',
   'bollworm': '/crops/cotton-bollworm.png',
   'cotton bollworm': '/crops/cotton-bollworm.png',
+  'downy mildew': '/crops/downy-mildew.png',
+  'maize downy mildew': '/crops/downy-mildew.png',
   'leaf curl': '/crops/leaf-curl.png',
   'panama wilt': '/crops/panama-wilt.png',
   'banana panama wilt': '/crops/panama-wilt.png',
